@@ -1,0 +1,61 @@
+﻿@model ResistanceCalc.Models.IndexViewModel
+
+@Styles.Render("~/Content/css/index")
+
+<header>
+    <div class="jumbotron">
+        <h2>Resistance Calculator</h2>
+        <small>Use this calculator to find the Ohm value of a Resistor</small>
+    </div>
+</header>
+
+<section>
+    <div class="alert alert-danger" id="dvError" style="display:none">
+        @*<a href="#" class="close" data-dismiss="alert">&times;</a>
+            <span class="glyphicon glyphicon-remove-sign"></span>*@
+    </div>
+</section>
+
+<section>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "formCalc" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-3 form-group">
+                @Html.LabelFor(d => d.BandAColor, new { @class = "requiredLabel" })
+                @Html.DropDownListFor(d => d.BandAColor, new SelectList(Model.SignificantColors), "", new { @id = "ddBandA", @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.BandAColor)
+            </div>
+            <div class="col-md-3 form-group">
+                @Html.LabelFor(d => d.BandBColor, new { @class = "requiredLabel" })
+                @Html.DropDownListFor(d => d.BandBColor, new SelectList(Model.SignificantColors), "", new { @id = "ddBandB", @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.BandBColor)
+            </div>
+            <div class="col-md-3 form-group">
+                @Html.LabelFor(d => d.BandCColor, new { @class = "requiredLabel" })
+                @Html.DropDownListFor(d => d.BandCColor, new SelectList(Model.MultiplierColors), "", new { @id = "ddBandC", @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.BandCColor)
+            </div>
+            <div class="col-md-3 form-group">
+                @Html.LabelFor(d => d.BandDColor, new { @class = "requiredLabel" })
+                @Html.DropDownListFor(d => d.BandDColor, new SelectList(Model.ToleranceColors), "", new { @id = "ddBandD", @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.BandDColor)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" name="name" value="Calculate" class="btn btn-primary" id="btnCalculate" />
+            </div>
+        </div>
+        <p>
+            <div class="text-success" id="dvCalcVal">
+
+            </div>
+        </p>
+        
+    }
+</section>
+
+@section scripts{
+    @Scripts.Render("~/bundles/index")
+}
