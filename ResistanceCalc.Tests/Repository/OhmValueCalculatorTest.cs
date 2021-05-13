@@ -32,7 +32,7 @@ namespace ResistanceCalc.Tests.Repository
         {
             var val = ohmValueCalculator.CalculateOhmValue("White", "White", "White", "White");
 
-            Assert.AreEqual(99000000000, val);
+            Assert.AreEqual(100000, val);
         }
 
         [TestMethod]
